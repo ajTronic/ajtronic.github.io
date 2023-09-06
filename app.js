@@ -57,7 +57,7 @@ function main() {
             if (inputBox.val() != activeWord.wordString + " ") {
                 activeWord.isError = true
             } else {
-                numCharsCorrectlyTyped += activeWord.wordString.length
+                numCharsCorrectlyTyped += inputBox.val().length
                 console.log('yeha', numCharsCorrectlyTyped, totalCharsTyped);
             }
             if (activeWordIndex == wordsData.length - 1) {
@@ -72,7 +72,7 @@ function main() {
             }
         }
         if (activeWordIndex == wordsData.length - 1 && inputBox.val() == activeWord.wordString) {
-            numCharsCorrectlyTyped += activeWord.wordString.length
+            numCharsCorrectlyTyped += inputBox.val().length
             console.log('yeha', numCharsCorrectlyTyped, totalCharsTyped);
             endDate = new Date()
             setTimeout(() => {
