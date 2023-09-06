@@ -5,7 +5,7 @@ const playAudioIcon = $("#playaudio > i")
 
 // consts
 const numWords = 10
-const words = ['the', 'dog', 'goes', 'up']
+const words = getWords(numWords)
 const wordsData = []
 
 // vars
