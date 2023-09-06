@@ -57,7 +57,7 @@ function main() {
             if (inputBox.val() != activeWord.wordString + " ") {
                 activeWord.isError = true
             } else {
-                numCharsCorrectlyTyped += activeWord.wordString.length + 1
+                numCharsCorrectlyTyped += activeWord.wordString.length
                 console.log('yeha', numCharsCorrectlyTyped, totalCharsTyped);
             }
             if (activeWordIndex == wordsData.length - 1) {
