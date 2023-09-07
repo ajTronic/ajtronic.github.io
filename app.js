@@ -4,7 +4,7 @@ const inputBox = $("#inputBox")
 const playAudioIcon = $("#playaudio > i")
 
 // consts
-const numWords = 10
+const numWords = 30
 const words = getWords(numWords)
 const wordsData = []
 

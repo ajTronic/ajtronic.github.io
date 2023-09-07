@@ -42,6 +42,25 @@ body {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+
+	.inputRow {
+		display: flex;
+		height: 60px;
+		column-gap: 0.3em;
+		width: 100%;
+
+		.inputBox {
+			font-size: 1.1em;
+			margin-top: 20px;
+			padding: 20px 5px;
+			flex: 1;
+		}
+
+		button#newtest {
+			// font-size: 0.;
+			flex: 0 0 120px;
+		}
+	}
 }
 
 .result {
@@ -55,9 +74,10 @@ body {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
+	// width: min(600px, 100%);
 	gap: 0 0.7ch;
 
-	> .word {
+	>.word {
 		padding: 4px;
 		margin: 3px 0;
 		border-radius: 5px;
@@ -65,31 +85,25 @@ body {
 		color: $fontColor;
 	}
 
-	> .word.active {
+	>.word.active {
 		background-color: $lighterBackground;
 	}
 
-	> .word.error {
+	>.word.error {
 		color: $errorColor;
 	}
 
-	> .word.currentlyError {
+	>.word.currentlyError {
 		background-color: $errorColor;
 	}
 }
 
-.inputBox {
-	width: min(600px, 70%);
-	height: 30px;
-	font-size: 1.1em;
-	margin-top: 20px;
-	padding: 20px 5px;
-}
+
 
 .wpm {
 	display: flex;
 
-	> .num {
+	>.num {
 		font-size: 2em;
 	}
 }

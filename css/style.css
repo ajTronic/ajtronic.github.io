@@ -26,6 +26,22 @@ body {
   justify-content: center;
   flex-direction: column;
 }
+.typingArea .inputRow {
+  display: flex;
+  height: 60px;
+  -moz-column-gap: 0.3em;
+       column-gap: 0.3em;
+  width: 100%;
+}
+.typingArea .inputRow .inputBox {
+  font-size: 1.1em;
+  margin-top: 20px;
+  padding: 20px 5px;
+  flex: 1;
+}
+.typingArea .inputRow button#newtest {
+  flex: 0 0 120px;
+}
 
 .result {
   align-items: center;
@@ -55,14 +71,6 @@ body {
 }
 .words > .word.currentlyError {
   background-color: rgba(249, 80, 80, 0.993);
-}
-
-.inputBox {
-  width: min(600px, 70%);
-  height: 30px;
-  font-size: 1.1em;
-  margin-top: 20px;
-  padding: 20px 5px;
 }
 
 .wpm {
