@@ -13,6 +13,7 @@ let numCharsCorrectlyTyped = 0
 let totalCharsTyped = 0
 let isDone = false
 let startDate
+let endDate
 let typeSound = new Howl({ src: ['press.wav'] })
 let currSoundIndex = 0
 let playAudio = true
@@ -38,24 +39,26 @@ function main() {
             typeSound.play();
     })
 
-    inputBox.keyup(e => {
-        console.log(e.key);
+    inputBox.keyup(function(e) {
+        // console.log(e.key);
         if (e.key == ' ' || (/[a-zA-Z]/.test(e.key) && e.key.length < 2)) { // is letter or space
             if (!startDate) startDate = new Date()
+            console.log('ye');
             totalCharsTyped++
-            console.log("asdf");
+            // console.log("asdf");
         }
 
         const activeWord = getActiveWord()
         const activeWordIndex = wordsData.indexOf(activeWord)
-        console.log(activeWord.wordString);
-        console.log(inputBox.val());
+        // console.log(activeWord.wordString);
+        // console.log(inputBox.val());
         wordsData[activeWordIndex].isCurrentlyError = !activeWord.wordString.startsWith(inputBox.val())
         if (inputBox.val().includes(" ") && activeWord != undefined) {
             if (inputBox.val() != activeWord.wordString + " ") {
                 activeWord.isError = true
             } else {
-                numCharsCorrectlyTyped += activeWord.wordString.length + 1
+                numCharsCorrectlyTyped += inputBox.val().length
+                console.log('yeha', numCharsCorrectlyTyped, totalCharsTyped);
             }
             if (activeWordIndex == wordsData.length - 1) {
                 console.log("done");
@@ -69,7 +72,9 @@ function main() {
             }
         }
         if (activeWordIndex == wordsData.length - 1 && inputBox.val() == activeWord.wordString) {
-            numCharsCorrectlyTyped += activeWord.wordString.length
+            numCharsCorrectlyTyped += inputBox.val().length
+            console.log('yeha', numCharsCorrectlyTyped, totalCharsTyped);
+            endDate = new Date()
             setTimeout(() => {
                 wordsData[activeWordIndex].isActive = false
                 wordsData[activeWordIndex].isCurrentlyError = false
@@ -91,7 +96,7 @@ function getActiveWord() {
 }
 
 function getWpm() {
-    const difference = new Date() - startDate
+    const difference = endDate - startDate
     const minsPassed = (difference / 1000) / 60
     return (numCharsCorrectlyTyped / 5) / minsPassed
 }
