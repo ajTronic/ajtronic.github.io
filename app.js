@@ -1,4 +1,6 @@
-// elements
+// accuracy => num words correct / num words total
+
+1// elements
 const wordsEl = $(".words")
 const inputBox = $("#inputBox")
 const playAudioIcon = $("#playaudio > i")
@@ -8,15 +10,18 @@ const numWords = 30
 const words = getWords(numWords)
 const wordsData = []
 
-// vars
 let numCharsCorrectlyTyped = 0
 let totalCharsTyped = 0
+// vars
+let numWordsTyped = 0
+let numWordsCorrectlyTyped = 0
 let isDone = false
 let startDate
 let endDate
 let typeSound = new Howl({ src: ['press.wav'] })
 let currSoundIndex = 0
 let playAudio = true
+let activeWordIndex = 0
 
 main()
 
@@ -39,49 +44,35 @@ function main() {
             typeSound.play();
     })
 
-    inputBox.keyup(function(e) {
-        // console.log(e.key);
-        if (e.key == ' ' || (/[a-zA-Z]/.test(e.key) && e.key.length < 2)) { // is letter or space
-            if (!startDate) startDate = new Date()
-            console.log('ye');
-            totalCharsTyped++
-            // console.log("asdf");
-        }
+    inputBox.bind('input', e => {
+        if (!startDate) startDate = new Date()
 
-        const activeWord = getActiveWord()
-        const activeWordIndex = wordsData.indexOf(activeWord)
-        // console.log(activeWord.wordString);
-        // console.log(inputBox.val());
-        wordsData[activeWordIndex].isCurrentlyError = !activeWord.wordString.startsWith(inputBox.val())
-        if (inputBox.val().includes(" ") && activeWord != undefined) {
-            if (inputBox.val() != activeWord.wordString + " ") {
-                activeWord.isError = true
-            } else {
-                numCharsCorrectlyTyped += inputBox.val().length
-                console.log('yeha', numCharsCorrectlyTyped, totalCharsTyped);
-            }
-            if (activeWordIndex == wordsData.length - 1) {
-                console.log("done");
-                isDone = true
-            }
-            wordsData[activeWordIndex].isActive = false
-            wordsData[activeWordIndex].isCurrentlyError = false
-            inputBox.val("")
-            if (activeWordIndex != wordsData.length - 1) {
-                wordsData[activeWordIndex + 1].isActive = true
-            }
-        }
-        if (activeWordIndex == wordsData.length - 1 && inputBox.val() == activeWord.wordString) {
-            numCharsCorrectlyTyped += inputBox.val().length
-            console.log('yeha', numCharsCorrectlyTyped, totalCharsTyped);
+        const val = $(inputBox).val()
+        const activeWord = wordsData[activeWordIndex]
+        activeWord.isActive = true
+        activeWord.isCurrentlyError = !activeWord.wordString.startsWith(val)
+
+        // last word was correct
+        if (activeWordIndex == wordsData.length - 1 && val == activeWord.wordString) {
             endDate = new Date()
+            numWordsCorrectlyTyped++
+
+            // slight delay
             setTimeout(() => {
-                wordsData[activeWordIndex].isActive = false
-                wordsData[activeWordIndex].isCurrentlyError = false
                 isDone = true
                 updateUI()
             }, 300)
+           
+        } else if (val.at(-1) == " ") {  // pressed space
+            inputBox.val("") // clear input
+
+            if (val == activeWord.wordString + " ") numWordsCorrectlyTyped++ // was correct
+            else activeWord.isError = true // was wrong
+
+            nextWord()
         }
+
+        // account for all the changes
         updateUI()
     })
 
@@ -112,6 +103,13 @@ function getWords(num) {
     return result
 }
 
+function nextWord() {
+    const activeWord = wordsData[activeWordIndex]
+    activeWord.isActive = false
+    activeWord.isCurrentlyError = false
+    wordsData[++activeWordIndex].isActive = true
+}
+
 function updateUI() {
     wordsEl.children().each(function (i) {
         const word = wordsData[i]
@@ -122,10 +120,11 @@ function updateUI() {
         wordEl.text(word.wordString)
     })
     if (isDone) {
+        console.log(numWordsCorrectlyTyped);
         $(".typingArea").css('display', 'none')
         $(".result").css('display', 'flex').html(`
             <div>${Math.floor(getWpm())} WPM</div>
-            <div>${Math.floor(((numCharsCorrectlyTyped) / totalCharsTyped) * 100)}% accuracy</div>
+            <div>${Math.floor(((numWordsCorrectlyTyped) / words.length) * 100)}% accuracy</div>
             <button id="newtest">New test (Tab+Enter)</button>
         `)
         $("#newtest").on("click", () => {
