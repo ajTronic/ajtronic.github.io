@@ -1,9 +1,9 @@
 @import "https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap";
 
 // vars
-$font: 'Roboto Mono';
+$font: "Roboto Mono";
 $fontColor: white;
-$secondaryColor: #6212ece6;
+$primaryColor: #8bcbe4e6;
 $errorColor: rgba(249, 80, 80, 0.993);
 $background: #0f0f0f;
 $lighterBackground: #313337e6;
@@ -78,49 +78,43 @@ body {
 	width: min(600px, 100%);
 	gap: 0 0.7ch;
 
-	>.word {
+	> .word {
 		padding: 4px;
 		margin: 3px 0;
 		border-radius: 5px;
-		transition: all ease .23s;
+		transition: all ease 0.23s;
 		color: $fontColor;
 	}
 
-	>.word.active {
+	> .word.active {
 		background-color: $lighterBackground;
 	}
 
-	>.word.error {
+	> .word.error {
 		color: $errorColor;
 	}
 
-	>.word.currentlyError {
+	> .word.currentlyError {
 		background-color: $errorColor;
 	}
 }
 
 .stats {
 	width: 100%;
-	font-size: 20px;
+	font-size: 15px;
 	margin: 30px;
-	position: relative;
+	display: flex;
+	gap: 1em;
 
-	.wpm {
-		display: flex;
-
-		>.num {
-			font-size: 2em;
-		}
-	}
-
-	&::after {
-		content: '';
-		display: inline-block;
-		position: absolute;
-		background: green;
-		width: 10px;
-		height: 10px;
-		z-index: 100;
+	.stat {
+		padding: 5px;
+		border-radius: 5px;
+		color: white;
+		font-weight: 700;
+		text-decoration: underline;
+		text-decoration-color: $primaryColor;
+		text-underline-offset: 5px;
+		text-decoration-thickness: 3px;
 	}
 }
 
@@ -143,14 +137,16 @@ body {
 
 button {
 	cursor: pointer;
-	background-color: $secondaryColor;
+	background-color: $primaryColor;
 	outline: none;
 	border: none;
-	font-size: 20px;
+	font-size: 16px;
 	font-family: $font;
 	margin-top: 20px;
 	padding: 6px;
 	border-radius: 5px;
+	color: black;
+	font-weight: 700;
 }
 
 input {
