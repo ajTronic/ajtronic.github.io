@@ -25,6 +25,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  width: min(600px, 100%);
 }
 .typingArea .inputRow {
   display: flex;
@@ -54,6 +55,7 @@ body {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  width: min(600px, 100%);
   gap: 0 0.7ch;
 }
 .words > .word {
@@ -73,11 +75,26 @@ body {
   background-color: rgba(249, 80, 80, 0.993);
 }
 
-.wpm {
+.stats {
+  width: 100%;
+  font-size: 20px;
+  margin: 30px;
+  position: relative;
+}
+.stats .wpm {
   display: flex;
 }
-.wpm > .num {
+.stats .wpm > .num {
   font-size: 2em;
+}
+.stats::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  background: green;
+  width: 10px;
+  height: 10px;
+  z-index: 100;
 }
 
 #playaudio {

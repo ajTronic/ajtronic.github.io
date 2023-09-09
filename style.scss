@@ -42,6 +42,7 @@ body {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+	width: min(600px, 100%);
 
 	.inputRow {
 		display: flex;
@@ -74,7 +75,7 @@ body {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
-	// width: min(600px, 100%);
+	width: min(600px, 100%);
 	gap: 0 0.7ch;
 
 	>.word {
@@ -98,13 +99,28 @@ body {
 	}
 }
 
+.stats {
+	width: 100%;
+	font-size: 20px;
+	margin: 30px;
+	position: relative;
 
+	.wpm {
+		display: flex;
 
-.wpm {
-	display: flex;
+		>.num {
+			font-size: 2em;
+		}
+	}
 
-	>.num {
-		font-size: 2em;
+	&::after {
+		content: '';
+		display: inline-block;
+		position: absolute;
+		background: green;
+		width: 10px;
+		height: 10px;
+		z-index: 100;
 	}
 }
 

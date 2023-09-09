@@ -6,7 +6,7 @@ const inputBox = $("#inputBox")
 const playAudioIcon = $("#playaudio > i")
 
 // consts
-const numWords = 30
+const numWords = 20
 const words = getWords(numWords)
 const wordsData = []
 
@@ -82,10 +82,6 @@ function main() {
     })
 }
 
-function getActiveWord() {
-    return wordsData.find(word => word.isActive)
-}
-
 function getWpm() {
     const difference = endDate - startDate
     const minsPassed = (difference / 1000) / 60
@@ -119,6 +115,9 @@ function updateUI() {
         wordEl.applyClass('currentlyError', word.isCurrentlyError)
         wordEl.text(word.wordString)
     })
+    $("#newtest").on("click", () => {
+        window.location.reload()
+    })
     if (isDone) {
         console.log(numWordsCorrectlyTyped);
         $(".typingArea").css('display', 'none')
@@ -127,9 +126,7 @@ function updateUI() {
             <div>${Math.floor(((numWordsCorrectlyTyped) / words.length) * 100)}% accuracy</div>
             <button id="newtest">New test (Tab+Enter)</button>
         `)
-        $("#newtest").on("click", () => {
-            window.location.reload()
-        })
+        
     }
 
     if (playAudio) {
