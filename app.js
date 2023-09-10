@@ -49,24 +49,28 @@ function main() {
 
         const val = $(inputBox).val()
         const activeWord = wordsData[activeWordIndex]
-        activeWord.isActive = true
         activeWord.isCurrentlyError = !activeWord.wordString.startsWith(val)
 
         // last word was correct
         if (activeWordIndex == wordsData.length - 1 && val == activeWord.wordString) {
             endDate = new Date()
             numWordsCorrectlyTyped++
+            activeWord.isActive = false
 
             // slight delay
             setTimeout(() => {
                 isDone = true
                 updateUI()
             }, 300)
-           
+
         } else if (val.at(-1) == " ") {  // pressed space
+            activeWord.isActive = true
             inputBox.val("") // clear input
 
-            if (val == activeWord.wordString + " ") numWordsCorrectlyTyped++ // was correct
+            if (val == activeWord.wordString + " ") { // was correct
+                numWordsCorrectlyTyped++
+                numCharsCorrectlyTyped += val.length
+            }
             else activeWord.isError = true // was wrong
 
             nextWord()
@@ -83,7 +87,7 @@ function main() {
 }
 
 function getWpm() {
-    const difference = endDate - startDate
+    const difference = new Date() - startDate
     const minsPassed = (difference / 1000) / 60
     return (numCharsCorrectlyTyped / 5) / minsPassed
 }
@@ -104,6 +108,7 @@ function nextWord() {
     activeWord.isActive = false
     activeWord.isCurrentlyError = false
     wordsData[++activeWordIndex].isActive = true
+    numWordsTyped++
 }
 
 function updateUI() {
@@ -118,17 +123,17 @@ function updateUI() {
     $("#newtest").on("click", () => {
         window.location.reload()
     })
-    if (isDone) {
-        console.log(numWordsCorrectlyTyped);
-        $(".typingArea").css('display', 'none')
-        $(".result").css('display', 'flex').html(`
-            <div>${Math.floor(getWpm())} WPM</div>
-            <div>${Math.floor(((numWordsCorrectlyTyped) / words.length) * 100)}% accuracy</div>
-            <button id="newtest">New test (Tab+Enter)</button>
-        `)
-        
-    }
+    console.log(getWpm());
+    if (getWpm())
+        $('.wpm').text(Math.round(getWpm()) + "WPM")
+    if (numWordsTyped != 0) $(".acc").text(
+        Math.round((numWordsCorrectlyTyped / numWordsTyped) * 100) + "% accuracy"
+    )
 
+    if (isDone) {
+        inputBox.attr('disabled', 'true')
+        inputBox.val('')
+    }
     if (playAudio) {
         playAudioIcon
             .addClass('fa-volume-high')

@@ -1,4 +1,4 @@
-@import "https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;600;700&display=swap";
 * {
   color-scheme: dark;
   box-sizing: border-box;
@@ -86,11 +86,11 @@ body {
   padding: 5px;
   border-radius: 5px;
   color: white;
-  font-weight: 700;
+  font-weight: 600;
   text-decoration: underline;
-  text-decoration-color: rgba(139, 203, 228, 0.9019607843);
-  text-underline-offset: 5px;
-  text-decoration-thickness: 3px;
+  text-decoration-color: rgba(8, 183, 252, 0.9019607843);
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
 }
 
 #playaudio {
@@ -108,7 +108,7 @@ body {
 
 button {
   cursor: pointer;
-  background-color: rgba(139, 203, 228, 0.9019607843);
+  background-color: rgba(8, 183, 252, 0.9019607843);
   outline: none;
   border: none;
   font-size: 16px;
