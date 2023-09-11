@@ -6,15 +6,14 @@ const inputBox = $("#inputBox")
 const playAudioIcon = $("#playaudio > i")
 
 // consts
-const numWords = 20
+const numWords = 5
 const words = getWords(numWords)
 const wordsData = []
 
-let numCharsCorrectlyTyped = 0
-let totalCharsTyped = 0
 // vars
 let numWordsTyped = 0
 let numWordsCorrectlyTyped = 0
+let numCharsCorrectlyTyped = 0
 let isDone = false
 let startDate
 let endDate
@@ -55,6 +54,7 @@ function main() {
         if (activeWordIndex == wordsData.length - 1 && val == activeWord.wordString) {
             endDate = new Date()
             numWordsCorrectlyTyped++
+            numWordsTyped++
             activeWord.isActive = false
 
             // slight delay
