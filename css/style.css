@@ -67,6 +67,7 @@ body {
 }
 .words > .word.active {
   background-color: rgba(49, 51, 55, 0.9019607843);
+  translate: 0px -1.5px;
 }
 .words > .word.error {
   color: rgba(249, 80, 80, 0.993);

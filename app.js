@@ -6,7 +6,7 @@ const inputBox = $("#inputBox")
 const playAudioIcon = $("#playaudio > i")
 
 // consts
-const numWords = 5
+const numWords = 10
 const words = getWords(numWords)
 const wordsData = []
 
@@ -123,7 +123,6 @@ function updateUI() {
     $("#newtest").on("click", () => {
         window.location.reload()
     })
-    console.log(getWpm());
     if (getWpm())
         $('.wpm').text(Math.round(getWpm()) + "WPM")
     if (numWordsTyped != 0) $(".acc").text(
