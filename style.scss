@@ -100,25 +100,48 @@ body {
 		background-color: $errorColor;
 	}
 }
-
-.stats {
+.top {
 	width: 100%;
-	font-size: 15px;
-	margin: 30px;
 	display: flex;
-	gap: 1em;
+	justify-content: space-between;
 
-	.stat {
-		padding: 5px;
-		border-radius: 5px;
-		color: white;
+	.stats {
+		font-size: 15px;
+		margin: 30px 0;
+		display: flex;
+		gap: 1em;
+	
+		.stat {
+			padding: 5px;
+			color: white;
+			font-weight: 600;
+			text-decoration: underline;
+			text-decoration-color: $primaryColor;
+			text-underline-offset: 6px;
+			text-decoration-thickness: 2px;
+		}
+	}
+
+	.new {
+		display: flex;
+		align-items: center;
+		gap: 1em;
+		font-size: 15px;
 		font-weight: 600;
-		text-decoration: underline;
-		text-decoration-color: $primaryColor;
-		text-underline-offset: 6px;
-		text-decoration-thickness: 2px;
+
+		.wordCount {
+			cursor: pointer;
+			padding-bottom: 5px;
+			color: white;
+			font-weight: 600;
+			text-decoration: underline;
+			text-decoration-color: $primaryColor;
+			text-underline-offset: 6px;
+			text-decoration-thickness: 2px;
+		}
 	}
 }
+
 
 #playaudio {
 	position: absolute;

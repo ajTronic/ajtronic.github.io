@@ -77,16 +77,36 @@ body {
   background-color: rgba(249, 80, 80, 0.993);
 }
 
-.stats {
+.top {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.top .stats {
   font-size: 15px;
-  margin: 30px;
+  margin: 30px 0;
   display: flex;
   gap: 1em;
 }
-.stats .stat {
+.top .stats .stat {
   padding: 5px;
-  border-radius: 5px;
+  color: white;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(8, 183, 252, 0.9019607843);
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+}
+.top .new {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  font-size: 15px;
+  font-weight: 600;
+}
+.top .new .wordCount {
+  cursor: pointer;
+  padding-bottom: 5px;
   color: white;
   font-weight: 600;
   text-decoration: underline;
