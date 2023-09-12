@@ -6,7 +6,8 @@ const inputBox = $("#inputBox")
 const playAudioIcon = $("#playaudio > i")
 
 // consts
-const numWords = 10
+const searchParams = new URLSearchParams(window.location.search.slice(1));
+const numWords = Number(searchParams.get('w'))
 const words = getWords(numWords)
 const wordsData = []
 
