@@ -1,6 +1,6 @@
 // accuracy => num words correct / num words total
 
-1// elements
+// elements
 const wordsEl = $(".words")
 const inputBox = $("#inputBox")
 const playAudioIcon = $("#playaudio > i")
@@ -26,6 +26,8 @@ let activeWordIndex = 0
 main()
 
 function main() {
+    if (!numWords) window.location.href = '?w=10'
+
     words.forEach((word, i) => {
         wordsData.push({
             isActive: i == 0,
