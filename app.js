@@ -26,7 +26,7 @@ let activeWordIndex = 0
 main()
 
 function main() {
-    if (!numWords) window.location.href = '?w=10'
+    if (!numWords) window.location.href = '?w=15'
 
     words.forEach((word, i) => {
         wordsData.push({
